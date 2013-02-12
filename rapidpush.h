@@ -58,6 +58,6 @@ typedef struct {
     SSL_CTX* ssl_context;
 } rapidpush_connection;
 
-int rapidpush_notify(char* api_key, char* title, char* message, int priority, char* category, char* group, char* schedule_at);
+char* rapidpush_notify(char* api_key, char* title, char* message, int priority, char* category, char* group, char* schedule_at);
 
 #endif

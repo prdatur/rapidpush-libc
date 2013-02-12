@@ -9,6 +9,6 @@
 #include <stdlib.h>
 
 int main(int argc, char** argv) {
-	printf("Return code: %d\n", rapidpush_notify("YOU-API-KEY", "Title test", "message test", 2, "c_test", "", ""));
+	printf("Return code: %s\n", rapidpush_notify("YOU-API-KEY", "Title test", "message test", 2, "c_test", "", ""));
     return 0;
 }

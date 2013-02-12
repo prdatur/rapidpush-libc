@@ -19,14 +19,13 @@ static void rapidpush_ssl_disconnect(rapidpush_connection* c);
 static char rapidpush_int_to_hex(char code);
 static char* rapidpush_url_encode(char* str);
 
-int rapidpush_notify(char* api_key, char* title, char* message, int priority, char* category, char* group, char* schedule_at)
+char* rapidpush_notify(char* api_key, char* title, char* message, int priority, char* category, char* group, char* schedule_at)
 {
 	rapidpush_connection* c;
 	char buffer[MESSAGESIZE];
 	char* response = NULL;
 	cJSON *root;
 	char *out;
-	cJSON *json_response;
 #ifdef _WINDOWS
 	static int wsa_init = 0;
 #endif
@@ -109,19 +108,7 @@ end:
 	free(group);
 	free(schedule_at);
 	
-	json_response = cJSON_Parse(response);
-	
-	cJSON *rsp_code = json_response->child;
-	cJSON *rsp_desc = rsp_code->next;
-	int code = rsp_code->valueint;
-	int desc = rsp_desc->valuestring;
-	if (code == 200) {
-		return 200;
-	}
-	else {
-		fprintf(stderr, "RapidPush API Error: %s (%d)\n", desc, code);
-		return code;
-	}
+	return response;
 }
 
 static rapidpush_connection* rapidpush_ssl_connect()
